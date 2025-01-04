@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Rock, Paper, Scissors</title>
+    <script>
+        // Initialize Scores
+
+        let humanScore = 0;
+        let computerScore = 0;
+
+        // Round
+        let roundLength = 5;
+        for (let i = 0; i < roundLength; i++) {
+            let humanChoice = getHumanChoice();
+            let computerChoice = getComputerChoice();
+            playRound(humanChoice, computerChoice);
+            console.log("Your Score: " + humanScore + " | Computer Score: " + computerScore)
+            console.log((roundLength - i - 1) + " Rounds Left!")
+        }
+
+        console.log("Final Score: [You] " + humanScore + " [Computer] " + computerScore)
+
+
+            
+
+
+
+        function getComputerChoice() {
+            let num = Math.floor(Math.random() * 100) + 1;
+            if (num >= 67) {
+                return "rock";
+            } else if (num >= 33) {
+                return "paper";
+            } else {
+                return "scissors";
+            }
+        }
+
+        function getHumanChoice() {
+            let keepGoing = true;
+            while (keepGoing) {
+                let choice = prompt("Enter rock, paper, or scissors: ");
+                choice = choice.toLowerCase();
+                if ( 
+                    choice === "rock" ||
+                    choice === "paper" ||
+                    choice === "scissors"
+                ) {
+                    return choice;
+                }
+            }
+        }
+
+        function playRound(humanChoice, computerChoice) {
+            let playerWin = true;
+            let winningMove = humanChoice;
+            let losingMove = computerChoice;
+            if (humanChoice === computerChoice) {
+                console.log("Tie! You both chose " + humanChoice)
+                return;
+            } else if (
+                (computerChoice === "rock" && humanChoice === "scissors") ||
+                (computerChoice === "scissors" && humanChoice === "paper") ||
+                (computerChoice === "paper" && humanChoice === "rock")
+            ) {
+                playerWin = false;
+                winningMove = computerChoice;
+                losingMove = humanChoice;
+                computerScore += 1;
+            } else {
+                humanScore += 1;
+            }
+            
+            winWord = (playerWin) ? "win" : "lose";
+            console.log("You " + winWord + "! " + winningMove + " beats " + losingMove);
+        }
+    </script>
+</head>
+
+
+<body>
+
+</body>
+</html>
